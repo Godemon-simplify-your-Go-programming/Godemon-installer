@@ -2,3 +2,4 @@
     - Prepared installer for 21.04-LTS version
     - Directories error updated
 - AFTER
+    - Created full Godemon installer for UNIX family OS
