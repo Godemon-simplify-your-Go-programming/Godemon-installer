@@ -15,8 +15,9 @@ void prepareDirs(){
     system("mkdir ~/.godemon");
     system("mkdir ~/.godemon/logs/");
     system("mkdir ~/.godemon/bin/");
-    system("git clone https://github.com/Godemon-simplify-your-Go-programming/Godemon-update");
-    system("g++ ./Godemon-update/src/godemon_update.cpp -o godemon-update");
+    system("wget https://github.com/Godemon-simplify-your-Go-programming/Godemon-update/archive/godemon-installer-21-04-LTS.zip");
+    system("uzip godemon-installer-21-04-LTS.zip");
+    system("g++ ./Godemon-update-godemon-installer-21-04-LTS/Godemon-update/src/godemon_update.cpp -o godemon-update");
     system("sudo chmod 777 ./godemon-update");
     system("mv ./Godemon-update/godemon-update ~/.godemon/bin");
 }
