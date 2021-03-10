@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -68,7 +69,47 @@ func buildGodemon() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	cmd = exec.Command("sudo", "chmod", "777", "godemon")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
 	cmd = exec.Command("mv", "godemon", "../")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = os.Chdir("../")
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func buildGodemonUpdate() {
+	err := os.Chdir("./Godemon-update-godemon-update-21-04-LTS")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(os.Getwd())
+	cmd := exec.Command("g++", "src/godemon_update.cpp", "-o", "godemon-update")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd = exec.Command("sudo", "chmod", "777", "godemon-update")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd = exec.Command("mv", "godemon-update", "../")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
@@ -108,10 +149,7 @@ func prepareDirs() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	cmd = exec.Command("cd", "/")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	err = cmd.Run()
+	err = os.Chdir(localPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -137,6 +175,23 @@ func move() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	cmd = exec.Command("mv", "godemon-update", home+"/.godemon/bin")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func rmDirs() {
+	cmd := exec.Command("rm", "-r", "godemon-21.04-LTS", "Godemon-update-godemon-update-21-04-LTS")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
@@ -146,6 +201,8 @@ func main() {
 	unzipGodemon()
 	rmZips()
 	buildGodemon()
+	buildGodemonUpdate()
 	prepareDirs()
 	move()
+	rmDirs()
 }
