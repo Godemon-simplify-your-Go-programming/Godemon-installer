@@ -56,10 +56,36 @@ func rmZips() {
 	}
 }
 
+func buildGodemon() {
+	err := os.Chdir("./godemon-21.04-LTS")
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd := exec.Command("go", "build")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd = exec.Command("mv", "godemon", "../")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = os.Chdir("../")
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 func main() {
 	getGodemonUpdate()
 	unzipGodemonUpdate()
 	getGodemon()
 	unzipGodemon()
 	rmZips()
+	buildGodemon()
 }

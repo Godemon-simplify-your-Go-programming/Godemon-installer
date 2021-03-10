@@ -1,3 +1,4 @@
-- Prepared installer for 21.04-LTS version
-- Directories error updated
-- Deleted all files
+- BEFORE - Deleting all files
+    - Prepared installer for 21.04-LTS version
+    - Directories error updated
+- AFTER
