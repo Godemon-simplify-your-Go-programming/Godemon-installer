@@ -1,1 +1,3 @@
-module "Godemon-installer"
+module Godemon-installer
+
+go 1.15

@@ -81,6 +81,64 @@ func buildGodemon() {
 	}
 }
 
+func prepareDirs() {
+	localPath, err := os.Getwd()
+	err = os.Chdir(os.Getenv("HOME"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd := exec.Command("mkdir", ".godemon")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd = exec.Command("mkdir", ".godemon/bin")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd = exec.Command("mkdir", ".godemon/logs")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd = exec.Command("cd", "/")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd = exec.Command("ls")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = os.Chdir(localPath)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func move() {
+	home := os.Getenv("HOME")
+	cmd := exec.Command("mv", "godemon", home+"/.godemon/bin")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 func main() {
 	getGodemonUpdate()
 	unzipGodemonUpdate()
@@ -88,4 +146,6 @@ func main() {
 	unzipGodemon()
 	rmZips()
 	buildGodemon()
+	prepareDirs()
+	move()
 }
