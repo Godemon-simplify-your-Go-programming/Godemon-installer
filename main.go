@@ -46,9 +46,20 @@ func unzipGodemon() {
 	}
 }
 
+func rmZips() {
+	cmd := exec.Command("rm", "-r", "21.04-LTS.zip", "godemon-update-21-04-LTS.zip")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err := cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 func main() {
 	getGodemonUpdate()
 	unzipGodemonUpdate()
 	getGodemon()
 	unzipGodemon()
+	rmZips()
 }
