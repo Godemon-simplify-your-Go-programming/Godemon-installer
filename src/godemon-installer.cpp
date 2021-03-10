@@ -6,9 +6,10 @@ const std::string version = "21.04-LTS";
 void buildApp(){
     std::string temp ="unzip " + version + ".zip"; 
     system(temp.c_str());
-    temp = "mv ./godemon-" + version +"/* ./";
+    temp = "cd ./godemon-" + version;
     system(temp.c_str());
     system("go build");
+    system("cd ..")
 }
 
 void prepareDirs(){
