@@ -16,7 +16,7 @@ void prepareDirs(){
     system("mkdir ~/.godemon/logs/");
     system("mkdir ~/.godemon/bin/");
     system("git clone https://github.com/Godemon-simplify-your-Go-programming/Godemon-update");
-    system("g++ ./Godemon-update/godemon_update.cpp -o godemon-update");
+    system("g++ ./Godemon-update/src/godemon_update.cpp -o godemon-update");
     system("sudo chmod 777 ./godemon-update");
     system("mv ./Godemon-update/godemon-update ~/.godemon/bin");
 }
@@ -28,7 +28,7 @@ void removing(){
     temp = "sudo rm -r "+version+".zip";
     system(temp.c_str()); 
     temp = "sudo rm -r godemon-"+version;
-    system("sudo rm -r ./Godemon-update");
+    system("sudo rm -r ./godemon-update");
     system("sudo rm godemon-update");
     system("sudo rm -r cliTools controllers errors execs hotReload killProcess models prepareProject");
     system("sudo rm go.mod go.sum godemon-installer.sh LOGO-small.png LOGO.png main.go readme.md");
