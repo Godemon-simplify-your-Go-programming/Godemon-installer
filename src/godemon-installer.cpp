@@ -9,7 +9,7 @@ void buildApp(){
     temp = "cd ./godemon-" + version;
     system(temp.c_str());
     system("go build");
-    system("cd ..")
+    system("cd ..");
 }
 
 void prepareDirs(){
