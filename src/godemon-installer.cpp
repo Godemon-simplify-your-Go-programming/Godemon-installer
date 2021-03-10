@@ -52,7 +52,7 @@ int main(){
         prepareDirs();
         system("sudo mv godemon ~/.godemon/bin/");
         system("sudo chmod 777 ~/.godemon/bin/godemon");
-        removing();
+       // removing();
     }
     else if(GL==1){
         buildApp();
@@ -61,7 +61,7 @@ int main(){
         system("sudo mkdir /usr/local/.godemon/bin/");
         system("sudo mv godemon /usr/local/.godemon/bin/");
         system("sudo chmod 777 /usr/local/.godemon/bin/godemon");
-        removing();
+       // removing();
     }
 
     std::cout<<"Everything done"<<std::endl;
