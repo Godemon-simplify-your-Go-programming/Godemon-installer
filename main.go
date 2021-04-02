@@ -8,13 +8,13 @@ import (
 )
 
 func main() {
-	get.GetGodemonUpdate()
-	zipDirs.UnzipGodemonUpdate()
+	//get.GetGodemonUpdate()
+	//zipDirs.UnzipGodemonUpdate()
 	get.GetGodemon()
 	zipDirs.UnzipGodemon()
 	zipDirs.RmZips()
 	building.BuildGodemon()
-	building.BuildGodemonUpdate()
+	//building.BuildGodemonUpdate()
 	prepareDirs.PrepareDirs()
 	prepareDirs.Move()
 	prepareDirs.RmDirs()

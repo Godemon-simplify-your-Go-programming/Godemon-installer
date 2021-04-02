@@ -17,7 +17,7 @@ func GetGodemonUpdate() {
 }
 
 func GetGodemon() {
-	cmd := exec.Command("wget", "https://github.com/Godemon-simplify-your-Go-programming/godemon/archive/21.04-LTS.zip")
+	cmd := exec.Command("wget", "https://github.com/Godemon-simplify-your-Go-programming/godemon/archive/21.06.zip")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()

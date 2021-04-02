@@ -8,7 +8,7 @@ import (
 )
 
 func BuildGodemon() {
-	err := os.Chdir("./godemon-21.04-LTS")
+	err := os.Chdir("./godemon-21.06")
 	if err != nil {
 		log.Fatal(err)
 	}

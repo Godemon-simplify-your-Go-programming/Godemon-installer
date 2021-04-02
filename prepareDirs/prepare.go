@@ -1,6 +1,7 @@
 package prepareDirs
 
 import (
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -8,38 +9,41 @@ import (
 
 func PrepareDirs() {
 	localPath, err := os.Getwd()
-	err = os.Chdir(os.Getenv("HOME"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	cmd := exec.Command("mkdir", ".godemon")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	home := os.Getenv("HOME")
+	cmd := exec.Command("mkdir", home+"/.godemon")
 	err = cmd.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
-	cmd = exec.Command("mkdir", ".godemon/bin")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	cmd = exec.Command("mkdir", home+"/.godemon/bin")
 	err = cmd.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
-	cmd = exec.Command("mkdir", ".godemon/logs")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	cmd = exec.Command("mkdir", home+"/.godemon/logs")
 	err = cmd.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
+	cmd = exec.Command("cp", "-r", "./godemon-21.06/CHANGELOGS", home+"/.godemon/")
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+	cmd = exec.Command("mkdir", home+"/.godemon/.infos/")
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	v := []byte("21.06")
+	ioutil.WriteFile(home+"/.godemon/.infos/version.txt", v, 0644)
+
 	err = os.Chdir(localPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 	cmd = exec.Command("ls")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
 	err = cmd.Run()
 	if err != nil {
 		log.Fatal(err)
@@ -53,25 +57,14 @@ func PrepareDirs() {
 func Move() {
 	home := os.Getenv("HOME")
 	cmd := exec.Command("mv", "godemon", home+"/.godemon/bin")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
 	err := cmd.Run()
-	if err != nil {
-		log.Fatal(err)
-	}
-	cmd = exec.Command("mv", "godemon-update", home+"/.godemon/bin")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	err = cmd.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func RmDirs() {
-	cmd := exec.Command("rm", "-r", "godemon-21.04-LTS", "Godemon-update-godemon-update-21-04-LTS")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	cmd := exec.Command("rm", "-r", "./godemon-21.06")
 	err := cmd.Run()
 	if err != nil {
 		log.Fatal(err)
